@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+    --font-mono:
+        "Terminal", "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+        Consolas, monospace;
+}
+
+* {
+    border-color: var(--terminal-text-dimmer);
+}
+
+body {
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text);
+    font-family: var(--font-mono);
+    margin: 0;
+}

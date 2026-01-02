@@ -1,0 +1,530 @@
+/* ============================================
+   SINGCRAFT - SERIKA DARK THEME
+   ============================================ */
+
+/* Terminal UI Fonts */
+@font-face {
+    font-family: "Terminal";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../assets/fonts/SourceCodePro-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Terminal";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../assets/fonts/IBMPlexSans-Regular.woff2") format("woff2");
+    unicode-range: U+0030-0039;
+}
+
+/* Terminal Mode Variables */
+.terminal-mode {
+    --terminal-bg: #323437;
+    --terminal-bg-secondary: #2c2e31;
+    --terminal-bg-tertiary: #1e1f21;
+
+    --terminal-text: #d1d0c5;
+    --terminal-text-secondary: #939599;
+    --terminal-text-dim: #7d8084;
+    --terminal-text-dimmer: #5e6165;
+
+    --terminal-main: #e2b714;
+    --terminal-main-dim: #b89a0d;
+
+    --terminal-error: #ca4754;
+    --terminal-success: #98c379;
+    --terminal-warning: #e2b714;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+.terminal-mode body,
+.terminal-mode .terminal-app {
+    font-family: "Terminal", "JetBrains Mono", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    background: var(--terminal-bg);
+    color: var(--terminal-text);
+}
+
+.terminal-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes terminal-fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes terminal-slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--terminal-bg-secondary);
+    background: var(--terminal-bg);
+}
+
+.terminal-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.terminal-logo-icon {
+    color: var(--terminal-main);
+}
+
+.terminal-logo-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--terminal-text);
+    letter-spacing: 2px;
+}
+
+.terminal-logo-sub {
+    font-size: 11px;
+    color: var(--terminal-text-dimmer);
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.terminal-main {
+    flex: 1;
+    padding: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    animation: terminal-fadeIn 0.3s ease;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.terminal-card {
+    background: var(--terminal-bg-secondary);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: all 0.2s ease;
+}
+
+.terminal-card-title {
+    color: var(--terminal-text);
+    font-size: 13px;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.terminal-card-title .step-number {
+    background: var(--terminal-main);
+    color: var(--terminal-bg);
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+.terminal-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.terminal-tab {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--terminal-text-dim);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.terminal-tab:hover {
+    color: var(--terminal-text);
+    background: var(--terminal-bg-tertiary);
+}
+
+.terminal-tab.active {
+    color: var(--terminal-bg);
+    background: var(--terminal-main);
+}
+
+/* ============================================
+   INPUTS
+   ============================================ */
+.terminal-input {
+    background: var(--terminal-bg-tertiary);
+    border: 1px solid var(--terminal-bg-secondary);
+    color: var(--terminal-text);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    width: 100%;
+    transition: all 0.2s ease;
+    caret-color: var(--terminal-main);
+}
+
+.terminal-input::placeholder {
+    color: var(--terminal-text-dimmer);
+}
+
+.terminal-input:focus {
+    outline: none;
+    border-color: var(--terminal-main);
+    box-shadow: 0 0 0 2px rgba(226, 183, 20, 0.1);
+}
+
+.terminal-textarea {
+    background: var(--terminal-bg-tertiary);
+    border: 1px solid var(--terminal-bg-secondary);
+    color: var(--terminal-text);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    transition: all 0.2s ease;
+    caret-color: var(--terminal-main);
+}
+
+.terminal-textarea:focus {
+    outline: none;
+    border-color: var(--terminal-main);
+    box-shadow: 0 0 0 2px rgba(226, 183, 20, 0.1);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.terminal-btn {
+    background: var(--terminal-bg-secondary);
+    color: var(--terminal-text-dim);
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.terminal-btn:hover {
+    color: var(--terminal-text);
+    border-color: var(--terminal-text-dimmer);
+}
+
+.terminal-btn:active {
+    transform: scale(0.98);
+}
+
+.terminal-btn.primary {
+    background: var(--terminal-main);
+    color: var(--terminal-bg);
+}
+
+.terminal-btn.primary:hover {
+    background: var(--terminal-main-dim);
+}
+
+.terminal-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   RADIO OPTIONS
+   ============================================ */
+.terminal-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.terminal-radio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--terminal-bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.terminal-radio:hover {
+    border-color: var(--terminal-text-dimmer);
+}
+
+.terminal-radio.selected {
+    border-color: var(--terminal-main);
+    background: rgba(226, 183, 20, 0.05);
+}
+
+.terminal-radio-dot {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--terminal-text-dimmer);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.terminal-radio.selected .terminal-radio-dot {
+    border-color: var(--terminal-main);
+}
+
+.terminal-radio.selected .terminal-radio-dot::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--terminal-main);
+    border-radius: 50%;
+}
+
+.terminal-radio-label {
+    font-size: 13px;
+    color: var(--terminal-text);
+}
+
+.terminal-radio-desc {
+    font-size: 11px;
+    color: var(--terminal-text-dim);
+    margin-top: 2px;
+}
+
+/* ============================================
+   FILE INPUT
+   ============================================ */
+.terminal-file-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.terminal-file-input input[type="file"] {
+    display: none;
+}
+
+.terminal-file-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--terminal-bg-tertiary);
+    border: 1px dashed var(--terminal-text-dimmer);
+    border-radius: 6px;
+    color: var(--terminal-text-dim);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.terminal-file-label:hover {
+    border-color: var(--terminal-main);
+    color: var(--terminal-text);
+}
+
+/* ============================================
+   RESULT PREVIEW
+   ============================================ */
+.terminal-result {
+    background: var(--terminal-bg-tertiary);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.terminal-result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--terminal-bg-secondary);
+}
+
+.terminal-result-title {
+    font-size: 12px;
+    color: var(--terminal-text-dim);
+}
+
+.terminal-result-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-result-content {
+    padding: 14px;
+    max-height: 300px;
+    overflow: auto;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.terminal-result-content pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* ============================================
+   BADGES
+   ============================================ */
+.terminal-badge {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.terminal-badge.success {
+    background: rgba(152, 195, 121, 0.15);
+    color: var(--terminal-success);
+}
+
+.terminal-badge.error {
+    background: rgba(202, 71, 84, 0.15);
+    color: var(--terminal-error);
+}
+
+.terminal-badge.info {
+    background: rgba(226, 183, 20, 0.15);
+    color: var(--terminal-main);
+}
+
+/* ============================================
+   OUTBOUND LIST
+   ============================================ */
+.terminal-outbounds {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.terminal-outbound {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--terminal-bg-tertiary);
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.terminal-outbound-name {
+    color: var(--terminal-text);
+}
+
+.terminal-outbound-type {
+    color: var(--terminal-main);
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.terminal-footer {
+    padding: 16px 32px;
+    border-top: 1px solid var(--terminal-bg-secondary);
+    text-align: center;
+    font-size: 11px;
+    color: var(--terminal-text-dimmer);
+}
+
+.terminal-footer a {
+    color: var(--terminal-main);
+    text-decoration: none;
+}
+
+.terminal-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+.terminal-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.terminal-mode ::-webkit-scrollbar-track {
+    background: var(--terminal-bg);
+}
+
+.terminal-mode ::-webkit-scrollbar-thumb {
+    background: var(--terminal-bg-secondary);
+    border-radius: 4px;
+}
+
+.terminal-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--terminal-text-dimmer);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+.terminal-mode ::selection {
+    background: var(--terminal-main);
+    color: var(--terminal-bg);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .terminal-header {
+        padding: 12px 16px;
+    }
+
+    .terminal-main {
+        padding: 16px;
+    }
+
+    .terminal-tabs {
+        flex-wrap: wrap;
+    }
+}
