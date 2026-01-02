@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Singcraft
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-генератор конфигураций для [sing-box](https://sing-box.sagernet.org/) с поддержкой различных протоколов и форматов.
 
-Currently, two official plugins are available:
+**[Открыть приложение](https://hoaxisr.github.io/singcraft/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Возможности
 
-## React Compiler
+### Поддерживаемые форматы импорта
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **VLESS ссылки** — стандартные прокси-ссылки формата `vless://...`
+- **AmneziaVPN** — JSON конфигурации в формате XRay/V2Ray
+- **AmneziaWG** — WireGuard `.conf` файлы с полной поддержкой AWG 1.0/2.0
 
-## Expanding the ESLint configuration
+### AmneziaWG параметры
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Полная поддержка параметров обфускации:
+- Jitter: `Jc`, `Jmin`, `Jmax`
+- Packet size: `S1`, `S2`, `S3`, `S4`
+- Header: `H1`, `H2`, `H3`, `H4`
+- Init packet (AWG 2.0): `I1`, `I2`, `I3`, `I4`, `I5`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Пресеты
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**DNS:**
+- Google DNS
+- Cloudflare DNS
+- AdGuard DNS
+- Quad9 DNS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Inbound:**
+- TUN (системный туннель)
+- Mixed (HTTP + SOCKS5)
+
+## Использование
+
+1. Выберите формат импорта (VLESS / AmneziaVPN / AmneziaWG)
+2. Вставьте данные или загрузите файл
+3. Выберите DNS и Inbound пресеты
+4. Скачайте готовый `config.json`
+
+## Локальная разработка
+
+```bash
+# Установка зависимостей
+npm install
+
+# Запуск dev-сервера
+npm run dev
+
+# Сборка
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Технологии
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Zustand
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Лицензия
+
+MIT
