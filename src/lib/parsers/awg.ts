@@ -91,6 +91,17 @@ interface ParsedSection {
 }
 
 /**
+ * Wrap init packet value in angle brackets if not already wrapped
+ * sing-box expects i1-i5 values in "<base64>" format
+ */
+function wrapInitPacket(value: string): string {
+  if (value.startsWith("<") && value.endsWith(">")) {
+    return value;
+  }
+  return `<${value}>`;
+}
+
+/**
  * Parse a single line of key = value format
  */
 function parseLine(line: string): { key: string; value: string } | null {
@@ -105,16 +116,7 @@ function parseLine(line: string): { key: string; value: string } | null {
   if (eqIndex === -1) return null;
 
   const key = trimmed.slice(0, eqIndex).trim();
-  let value = trimmed.slice(eqIndex + 1).trim();
-
-  // Handle special case for I1-I5 which can have <...> format
-  if (value.startsWith("<") && value.includes(">")) {
-    // Extract content between < and >
-    const match = value.match(/<([^>]+)>/);
-    if (match) {
-      value = match[1].trim();
-    }
-  }
+  const value = trimmed.slice(eqIndex + 1).trim();
 
   return { key, value };
 }
@@ -335,12 +337,12 @@ export function parseAwgConfig(confContent: string): AwgParseResult {
   if (iface.h3) endpoint.h3 = iface.h3;
   if (iface.h4) endpoint.h4 = iface.h4;
 
-  // I1-I5 (AWG 2.0 init packet - optional)
-  if (iface.i1) endpoint.i1 = iface.i1;
-  if (iface.i2) endpoint.i2 = iface.i2;
-  if (iface.i3) endpoint.i3 = iface.i3;
-  if (iface.i4) endpoint.i4 = iface.i4;
-  if (iface.i5) endpoint.i5 = iface.i5;
+  // I1-I5 (AWG 2.0 init packet - optional, must be wrapped in <...>)
+  if (iface.i1) endpoint.i1 = wrapInitPacket(iface.i1);
+  if (iface.i2) endpoint.i2 = wrapInitPacket(iface.i2);
+  if (iface.i3) endpoint.i3 = wrapInitPacket(iface.i3);
+  if (iface.i4) endpoint.i4 = wrapInitPacket(iface.i4);
+  if (iface.i5) endpoint.i5 = wrapInitPacket(iface.i5);
 
   // Parse Peers
   for (let i = 0; i < sections.peers.length; i++) {
