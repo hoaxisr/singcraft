@@ -273,6 +273,7 @@ export function parseAwgConfig(confContent: string): AwgParseResult {
     useIntegratedTun: false,
     private_key: iface.privatekey,
     address: [],
+    mtu: 1280, // Default MTU, will be overwritten if present in config
     peers: [],
   };
 
